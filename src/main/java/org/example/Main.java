@@ -1,17 +1,95 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+class Libro {
+    private String titulo;
+    private String autor;
+    private String codigo;
+    private boolean disponible;
+
+    public Libro(String titulo, String autor, String isbn) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.codigo = codigo;
+        this.disponible = true;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public String getcodigo() {
+        return codigo;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+
+    public String toString() {
+        return "Libro{" +
+                "titulo=" + titulo + '\'' +
+                " autor=" + autor + '\'' +
+                " codigo=" + codigo + '\'' +
+                " disponible=" + disponible +
+                '}';
+    }
+}
+
+class Biblioteca {
+    private List<Libro> libros;
+
+    public Biblioteca() {
+        this.libros = new ArrayList<>();
+    }
+
+    public void agregarLibro(Libro libro) {
+        libros.add(libro);
+        System.out.println("El libro se agrego correctamente.");
+    }
+
+    public void buscarLibroPorTitulo(String titulo) {
+        for (Libro libro : libros) {
+            if (libro.getTitulo().equalsIgnoreCase(titulo)) {
+                System.out.println(libro);
+                return;
+            }
+        }
+        System.out.println("El nombre del libro no se encuentra en la base.");
+    }
+
+    public void buscarLibroPorAutor(String autor) {
+        boolean encontrado = false;
+        for (Libro libro : libros) {
+            if (libro.getAutor().equalsIgnoreCase(autor)) {
+                System.out.println(libro);
+                encontrado = true;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("No se encontraron libros de ese autor.");
+        }
+    }
+
+    public void listarLibros() {
+        if (libros.isEmpty()) {
+            System.out.println("No se han guardado libros en la biblioteca.");
+        } else {
+            for (Libro libro : libros) {
+                System.out.println(libro);
+            }
         }
     }
 }
